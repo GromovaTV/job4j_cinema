@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <title>Cinema</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
+<script>
+    function redirect() {
+        const place = $("input[name='place']:checked").val();
+        if (place === undefined) {
+            alert('Место не выбрано');
+            return false;
+        }
+        const placeArray = place.split("-").map(Number);
+        $.ajax({
+            type: 'POST',
+            url: '/cinema/hall',
+            data: JSON.stringify({
+                row: placeArray[0],
+                cell: placeArray[1]
+            }),
+            dataType: 'json'
+        }).done(function (data) {
+        }).fail(function (err) {
+            console.log(err);
+        });
+        window.location.href = "/cinema/payment.html";
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        function loadCinemaHall() {
+            $.ajax({
+                type: 'GET',
+                url: '/cinema/hall',
+                dataType: 'json'
+            }).done(function (data) {
+                var i = 1;
+                var tbody = $('<tbody></tbody>');
+                for (var row = 1; row <= 3; row++) {
+                    var tr = $('<tr></tr>');
+                    tr.append('<th>' + row + '</th>');
+                    for (var cell = 1; cell <= 3; cell++) {
+                        var td = $('<td></td>');
+                        var labelText = 'Ряд ' + row + ', Место ' + cell;
+                        var placeValue = row + '-' + cell;
+                        var input = $('<input>', {
+                            type: 'radio',
+                            name: 'place',
+                            id: i++,
+                            value: placeValue
+                        });
+                        for (const place of data) {
+                            if (row === place.row && cell === place.cell) {
+                                input.prop('disabled', true);
+                            }
+                        }
+                        td.append(input);
+                        td.append(' ' + labelText);
+                        tr.append(td);
+                    }
+                    tbody.append(tr);
+                }
+                $('#tb').append(tbody);
+            }).fail(function (xhr, status, error) {
+                console.log("XHR:", xhr);
+                console.log("Status:", status);
+                console.log("Error:", error);
+            });
+        }
+        loadCinemaHall();
+    });
+
+    $(document).ready(function () {
+        function updateCinemaHall() {
+            $.ajax({
+                type: 'GET',
+                url: '/cinema/hall',
+                dataType: 'json'
+            }).done(function (data) {
+                var i = 1;
+                for (var row = 1; row <= 3; row++) {
+                    for (var cell = 1; cell <= 3; cell++) {
+                        for (const place of data) {
+                            if (row === place.row && cell === place.cell) {
+                                console.log(i + ": true");
+                                $('#' + i).prop('disabled', true);
+                            }
+                        }
+                        i = i + 1;
+                    }
+                }
+            }).fail(function (xhr, status, error) {
+                console.log("XHR:", xhr);
+                console.log("Status:", status);
+                console.log("Error:", error);
+            });
+        }
+        updateCinemaHall();
+        setInterval(updateCinemaHall, 10000);
+    });
+</script>
+
+<body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<div class="container">
+    <div class="row pt-3">
+        <h4>
+            Бронирование места на сеанс
+        </h4>
+        <table class="table table-bordered" id="tb">
+            <thead>
+            <tr>
+                <th style="width: 120px;">Ряд / Место</th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="row float-right">
+        <button type="button" class="btn btn-success" onclick="return redirect();">Оплатить</button>
+    </div>
+</div>
+</body>
+</html>

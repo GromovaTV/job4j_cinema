@@ -4,4 +4,23 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <welcome-file-list>
+    <welcome-file>/welcome/index.html</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>HallServlet</servlet-name>
+    <servlet-class>controller.HallServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>PaymentServlet</servlet-name>
+    <servlet-class>controller.PaymentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HallServlet</servlet-name>
+    <url-pattern>/hall</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PaymentServlet</servlet-name>
+    <url-pattern>/payment</url-pattern>
+  </servlet-mapping>
 </web-app>

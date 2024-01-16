@@ -3,24 +3,24 @@ package ru.job4j.model;
 public class Ticket {
 
     private int id;
-    private int session_id;
+    private int sessionId;
     private int row;
     private int cell;
-    private int account_id;
+    private int accountId;
 
-    public Ticket(int id, int session_id, int row, int cell, int account_id) {
+    public Ticket(int id, int sessionId, int row, int cell, int accountId) {
         this.id = id;
-        this.session_id = session_id;
+        this.sessionId = sessionId;
         this.row = row;
         this.cell = cell;
-        this.account_id = account_id;
+        this.accountId = accountId;
     }
 
-    public Ticket(int session_id, int row, int cell, int account_id) {
-        this.session_id = session_id;
+    public Ticket(int sessionId, int row, int cell, int accountId) {
+        this.sessionId = sessionId;
         this.row = row;
         this.cell = cell;
-        this.account_id = account_id;
+        this.accountId = accountId;
     }
 
     public int getId() {
@@ -31,20 +31,20 @@ public class Ticket {
         this.id = id;
     }
 
-    public int getAccount_id() {
-        return account_id;
+    public int getAccountId() {
+        return accountId;
     }
 
-    public void setAccount_id(int account_id) {
-        this.account_id = account_id;
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
     }
 
-    public int getSession_id() {
-        return session_id;
+    public int getSessionId() {
+        return sessionId;
     }
 
-    public void setSession_id(int session_id) {
-        this.session_id = session_id;
+    public void setSessionId(int sessionId) {
+        this.sessionId = sessionId;
     }
 
     public int getRow() {
@@ -66,8 +66,8 @@ public class Ticket {
     @Override
     public String toString() {
         return "Ticket{" + "id=" + id
-                + ", account_id=" + account_id
-                + ", session_id=" + session_id
+                + ", account_id=" + accountId
+                + ", session_id=" + sessionId
                 + ", row=" + row
                 + ", cell=" + cell
                 + '}';

@@ -18,7 +18,7 @@ import java.util.Properties;
 
 public class DbStore implements Store {
 
-    private static final DbStore instance = new DbStore();
+    private static final DbStore STORE = new DbStore();
     private final BasicDataSource pool = new BasicDataSource();
 
     private DbStore() {
@@ -58,8 +58,8 @@ public class DbStore implements Store {
     @Override
     public void save(Account account) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("INSERT INTO account(username, email, phone)" +
-                             "VALUES (?, ?, ?)",
+             PreparedStatement ps = cn.prepareStatement("INSERT INTO account(username, email, phone)"
+                             + "VALUES (?, ?, ?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             ps.setString(1, account.getName());
@@ -79,14 +79,14 @@ public class DbStore implements Store {
     @Override
     public void save(Ticket ticket) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("INSERT INTO ticket(session_id, row, cell, account_id)" +
-                             "VALUES (?, ?, ?, ?)",
+             PreparedStatement ps = cn.prepareStatement("INSERT INTO ticket(session_id, row, cell, account_id)"
+                             + "VALUES (?, ?, ?, ?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
-            ps.setInt(1, ticket.getSession_id());
+            ps.setInt(1, ticket.getSessionId());
             ps.setInt(2, ticket.getRow());
             ps.setInt(3, ticket.getCell());
-            ps.setInt(4, ticket.getAccount_id());
+            ps.setInt(4, ticket.getAccountId());
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
                 if (id.next()) {

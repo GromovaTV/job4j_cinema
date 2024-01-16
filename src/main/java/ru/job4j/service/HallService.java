@@ -27,10 +27,10 @@ public class HallService {
 
     public void handlePost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Ticket place = GSON.fromJson(req.getReader(), Ticket.class);
-        int session_id = 0;
+        int sessionId = 0;
         var context = req.getServletContext();
-        context.setAttribute("row" , place.getRow());
+        context.setAttribute("row", place.getRow());
         context.setAttribute("cell", place.getCell());
-        context.setAttribute("session_id", session_id);
+        context.setAttribute("session_id", sessionId);
     }
 }

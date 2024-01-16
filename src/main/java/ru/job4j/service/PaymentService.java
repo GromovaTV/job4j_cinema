@@ -20,8 +20,8 @@ public class PaymentService {
         var context = req.getServletContext();
         var row = Integer.parseInt(context.getAttribute("row").toString());
         var cell = Integer.parseInt(context.getAttribute("cell").toString());
-        var session_id = Integer.parseInt(context.getAttribute("session_id").toString());
-        var ticket = new Ticket(session_id, row, cell, 0);
+        var sessionId = Integer.parseInt(context.getAttribute("session_id").toString());
+        var ticket = new Ticket(sessionId, row, cell, 0);
         OutputStream output = resp.getOutputStream();
         String json = GSON.toJson(ticket);
         output.write(json.getBytes(StandardCharsets.UTF_8));
@@ -32,13 +32,13 @@ public class PaymentService {
     public void handlePost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Account acc = GSON.fromJson(req.getReader(), Account.class);
         DbStore.instOf().save(acc);
-        var account_id = acc.getId();
+        var accountId = acc.getId();
         var context = req.getServletContext();
-        context.setAttribute("account_id", account_id);
+        context.setAttribute("account_id", accountId);
         var row = Integer.parseInt(context.getAttribute("row").toString());
         var cell = Integer.parseInt(context.getAttribute("cell").toString());
-        var session_id = Integer.parseInt(context.getAttribute("session_id").toString());
-        var ticket = new Ticket(session_id, row, cell, account_id);
+        var sessionId = Integer.parseInt(context.getAttribute("session_id").toString());
+        var ticket = new Ticket(sessionId, row, cell, accountId);
         DbStore.instOf().save(ticket);
         OutputStream output = resp.getOutputStream();
         String json = GSON.toJson(ticket);

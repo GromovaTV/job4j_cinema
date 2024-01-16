@@ -57,7 +57,7 @@ function pay() {
         }),
         dataType: 'json'
     }).done(function (data) {
-        $('.row h3').text('Вы купили билет. Сеанс ' + data.session_id + ', ряд '
+        $('.row h3').text('Вы купили билет. Ряд '
             + data.row + ' место ' + data.cell);
         $('form').remove();
     }).fail(function (err) {

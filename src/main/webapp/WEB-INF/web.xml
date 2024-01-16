@@ -9,11 +9,11 @@
   </welcome-file-list>
   <servlet>
     <servlet-name>HallServlet</servlet-name>
-    <servlet-class>controller.HallServlet</servlet-class>
+    <servlet-class>ru.job4j.controller.HallServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>PaymentServlet</servlet-name>
-    <servlet-class>controller.PaymentServlet</servlet-class>
+    <servlet-class>ru.job4j.controller.PaymentServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>HallServlet</servlet-name>

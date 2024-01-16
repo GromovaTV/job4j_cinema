@@ -1,9 +1,10 @@
-package service;
+package ru.job4j.service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import model.Ticket;
-import persistence.DbStore;
+import ru.job4j.model.Ticket;
+import ru.job4j.persistence.DbStore;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 
 public class HallService {
+
     private static final Gson GSON = new GsonBuilder().create();
 
     public void handleGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {

@@ -1,21 +1,26 @@
-package persistence;
+package ru.job4j.persistence;
 
-import model.Account;
-import model.Ticket;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.postgresql.util.PSQLException;
+import ru.job4j.model.Account;
+import ru.job4j.model.Ticket;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
 
 public class DbStore implements Store {
+
     private static final DbStore instance = new DbStore();
     private final BasicDataSource pool = new BasicDataSource();
+
     private DbStore() {
         Properties cfg = new Properties();
         try (BufferedReader io = new BufferedReader(

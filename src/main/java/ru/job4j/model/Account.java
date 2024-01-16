@@ -1,6 +1,7 @@
-package model;
+package ru.job4j.model;
 
 public class Account {
+
     private int id;
     private String username;
     private String email;

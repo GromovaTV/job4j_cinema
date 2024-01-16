@@ -2,16 +2,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
   <groupId>ru.job4j</groupId>
   <artifactId>job4j_cinema</artifactId>
   <version>1.0</version>
   <packaging>war</packaging>
   <name>job4j_cinema</name>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
   </properties>
+
   <profiles>
     <profile>
       <id>test</id>
@@ -35,6 +38,7 @@
       </properties>
     </profile>
   </profiles>
+
   <dependencies>
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -97,40 +101,14 @@
       <version>2.8.7</version>
     </dependency>
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>1.7.36</version>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.17</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
-      <version>1.7.32</version>
+      <version>1.7.30</version>
     </dependency>
   </dependencies>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.liquibase</groupId>
-        <artifactId>liquibase-maven-plugin</artifactId>
-        <version>3.6.2</version>
-        <configuration>
-          <changeLogFile>${basedir}/db/master.xml</changeLogFile>
-          <url>${db.url}</url>
-          <driver>${db.driver}</driver>
-          <username>${db.username}</username>
-          <password>${db.password}</password>
-          <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
-        </configuration>
-        <executions>
-          <execution>
-            <phase>process-resources</phase>
-            <goals>
-              <goal>clearCheckSums</goal>
-              <goal>update</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
 </project>

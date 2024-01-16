@@ -1,6 +1,7 @@
-package model;
+package ru.job4j.model;
 
 public class Ticket {
+
     private int id;
     private int session_id;
     private int row;
@@ -14,12 +15,14 @@ public class Ticket {
         this.cell = cell;
         this.account_id = account_id;
     }
+
     public Ticket(int session_id, int row, int cell, int account_id) {
         this.session_id = session_id;
         this.row = row;
         this.cell = cell;
         this.account_id = account_id;
     }
+
     public int getId() {
         return id;
     }

@@ -1,6 +1,7 @@
-package controller;
+package ru.job4j.controller;
 
-import service.PaymentService;
+import ru.job4j.service.PaymentService;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class PaymentServlet extends HttpServlet {
+
     private PaymentService service = new PaymentService();
 
     @Override
